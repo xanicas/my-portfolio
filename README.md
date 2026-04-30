@@ -1,73 +1,52 @@
-# React + TypeScript + Vite
+# Alexandra Silva — Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Personal portfolio site for **Alexandra Silva**, a frontend developer. Built with React and Vite, deployed to GitHub Pages.
 
-Currently, two official plugins are available:
+## About
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+This repo is a minimal, easy-to-edit layout: navigation, hero, projects, about, and contact. Replace the placeholder project cards and contact details with your own links and copy.
 
-## React Compiler
+## Tech stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- HTML, CSS, JavaScript
+- [React](https://react.dev/) with [Vite](https://vite.dev/)
+- [Google Fonts](https://fonts.google.com/) — Inter & Space Grotesk
+- Light/dark styles via `prefers-color-scheme`
+- Responsive layout
 
-## Expanding the ESLint configuration
+## Running locally
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Use **Node.js 20.19+** or **22.12+** (required by Vite 8 — matches the GitHub Actions workflow).
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Open the URL Vite prints (usually `http://localhost:5173/my-portfolio/` because of the `base` path in `vite.config.js`).
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Build for production:
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run build
+npm run preview
 ```
+
+## Deployment (GitHub Pages)
+
+1. In the repo on GitHub: **Settings → Pages**. Set **Source** to **GitHub Actions** (not “Deploy from a branch”).
+2. Push to `main`. The workflow in `.github/workflows/deploy.yml` builds with `npm ci` / `npm run build` and publishes the `dist` folder.
+
+The site is configured for a project page at **`/my-portfolio/`** (`base` in `vite.config.js`). If your repository name is different, change `base` to `"/<your-repo-name>/"`.
+
+## Contact
+
+Update these in `src/components/Contact.jsx` (and anywhere else you like):
+
+- Email
+- [LinkedIn](https://www.linkedin.com/in/alexandrasilva)
+- [GitHub](https://github.com/alexandrasilva)
+
+## License
+
+Copyright 2026 Alexandra Silva. All rights reserved.
