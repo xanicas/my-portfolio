@@ -16,7 +16,7 @@ This repo is a minimal, easy-to-edit layout: navigation, hero, projects, about, 
 
 ## Running locally
 
-Use **Node.js 20.19+** or **22.12+** (required by Vite 8 — matches the GitHub Actions workflow).
+Use **Node.js 20.19+**, **22.13+**, or **24+** (matches `package.json` `engines` and **ESLint 10**). The GitHub Actions workflow uses Node 20. **Node 21** is not supported by Vite 6’s own engine range.
 
 ```bash
 npm install
@@ -35,7 +35,7 @@ npm run preview
 ## Deployment (GitHub Pages)
 
 1. In the repo on GitHub: **Settings → Pages**. Set **Source** to **GitHub Actions** (not “Deploy from a branch”).
-2. Push to `main`. The workflow in `.github/workflows/deploy.yml` builds with `npm ci` / `npm run build` and publishes the `dist` folder.
+2. Push to `main`, or run **Deploy React Portfolio to GitHub Pages** manually from the **Actions** tab (`workflow_dispatch`). The workflow runs `npm ci`, `npm run build`, and publishes the `dist` folder.
 
 The site is configured for a project page at **`/my-portfolio/`** (`base` in `vite.config.js`). If your repository name is different, change `base` to `"/<your-repo-name>/"`.
 
