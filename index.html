@@ -1,17 +1,33 @@
 <!doctype html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta
+            name="description"
+            content="Alexandra Silva — Frontend Developer based in Lisbon, with 6+ years of experience building scalable React and TypeScript web applications."
+        />
+        <title>Alexandra Silva — Frontend Developer</title>
+        <script>
+            (function () {
+                try {
+                    var stored = localStorage.getItem("theme");
+                    var system = window.matchMedia(
+                        "(prefers-color-scheme: dark)",
+                    ).matches
+                        ? "dark"
+                        : "light";
+                    document.documentElement.dataset.theme = stored || system;
+                } catch (e) {
+                    document.documentElement.dataset.theme = "light";
+                }
+            })();
+        </script>
+    </head>
 
-<head>
-	<meta charset="UTF-8" />
-	<link rel="icon" type="image/svg+xml" href="./favicon.svg" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<meta name="description" content="Alexandra Silva — personal portfolio: projects, about, and contact." />
-	<title>Alexandra Silva — Portfolio</title>
-</head>
-
-<body>
-	<div id="root"></div>
-	<script type="module" src="/src/main.jsx"></script>
-</body>
-
+    <body>
+        <div id="root"></div>
+        <script type="module" src="/src/main.jsx"></script>
+    </body>
 </html>

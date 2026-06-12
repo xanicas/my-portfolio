@@ -27,7 +27,7 @@ Deployed via GitHub Pages from `main` (push runs the Actions workflow that build
 Update these in `src/components/Contact.jsx` (and anywhere else you like):
 
 - Email: alexa.as@hotmail.com
-- [LinkedIn](https://www.linkedin.com/in/alexandra-silva-482966b3/)
+- [LinkedIn](hhttps://www.linkedin.com/in/alexandra-silva-482966b3)
 - [GitHub](https://github.com/xanicas)
 
 ## License
