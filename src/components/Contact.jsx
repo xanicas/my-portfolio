@@ -12,7 +12,7 @@ export default function Contact() {
                 </li>
                 <li>
                     <a
-                        href="https://www.linkedin.com/in/alexandra-silva"
+                        href="https://www.linkedin.com/in/alexandra-silva-482966b3"
                         target="_blank"
                         rel="noreferrer"
                     >

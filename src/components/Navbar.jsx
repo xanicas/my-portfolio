@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import useHideOnScroll from "../hooks/useHideOnScroll";
 import useTheme from "../hooks/useTheme";
 
@@ -48,35 +49,116 @@ function MoonIcon() {
 export default function Navbar() {
     const { theme, toggle } = useTheme();
     const hidden = useHideOnScroll();
+    const [menuOpen, setMenuOpen] = useState(false);
     const isDark = theme === "dark";
 
+    useEffect(() => {
+        document.body.classList.toggle("nav-open", menuOpen);
+        return () => document.body.classList.remove("nav-open");
+    }, [menuOpen]);
+
+    useEffect(() => {
+        const onKeyDown = (event) => {
+            if (event.key === "Escape") setMenuOpen(false);
+        };
+        const onResize = () => {
+            if (window.innerWidth > 768) setMenuOpen(false);
+        };
+
+        window.addEventListener("keydown", onKeyDown);
+        window.addEventListener("resize", onResize);
+        return () => {
+            window.removeEventListener("keydown", onKeyDown);
+            window.removeEventListener("resize", onResize);
+        };
+    }, []);
+
+    const closeMenu = () => setMenuOpen(false);
+
+    const navClass = [
+        "nav",
+        hidden && !menuOpen ? "nav--hidden" : "",
+        menuOpen ? "nav--menu-open" : "",
+    ]
+        .filter(Boolean)
+        .join(" ");
+
     return (
-        <header className={hidden ? "nav nav--hidden" : "nav"}>
-            <a className="nav__brand" href="#top">
-                Alexandra Silva
-            </a>
-            <div className="nav__right">
-                <nav className="nav__links" aria-label="Primary">
+        <>
+            <header className={navClass}>
+                <a
+                    className="nav__brand"
+                    href="#top"
+                    aria-label="Alexandra Silva, home"
+                    onClick={closeMenu}
+                >
+                    AS<span className="nav__brand-dot">.</span>
+                </a>
+                <div className="nav__right">
+                    <nav className="nav__links" aria-label="Primary">
+                        {links.map(({ href, label }) => (
+                            <a key={href} href={href}>
+                                {label}
+                            </a>
+                        ))}
+                    </nav>
+                    <div className="nav__actions">
+                        <button
+                            type="button"
+                            className="theme-toggle"
+                            onClick={toggle}
+                            aria-label={
+                                isDark
+                                    ? "Switch to light mode"
+                                    : "Switch to dark mode"
+                            }
+                            title={
+                                isDark
+                                    ? "Switch to light mode"
+                                    : "Switch to dark mode"
+                            }
+                        >
+                            {isDark ? <SunIcon /> : <MoonIcon />}
+                        </button>
+                        <button
+                            type="button"
+                            className={
+                                menuOpen
+                                    ? "nav__toggle nav__toggle--open"
+                                    : "nav__toggle"
+                            }
+                            aria-expanded={menuOpen}
+                            aria-controls="mobile-menu"
+                            aria-label={menuOpen ? "Close menu" : "Open menu"}
+                            onClick={() => setMenuOpen((open) => !open)}
+                        >
+                            <span />
+                            <span />
+                            <span />
+                        </button>
+                    </div>
+                </div>
+            </header>
+            <div
+                id="mobile-menu"
+                className={
+                    menuOpen ? "nav__drawer nav__drawer--open" : "nav__drawer"
+                }
+                aria-hidden={!menuOpen}
+                onClick={closeMenu}
+            >
+                <nav
+                    className="nav__drawer-links"
+                    aria-label="Mobile"
+                    onClick={(event) => event.stopPropagation()}
+                >
                     {links.map(({ href, label }) => (
-                        <a key={href} href={href}>
+                        <a key={href} href={href} onClick={closeMenu}>
                             {label}
                         </a>
                     ))}
                 </nav>
-                <button
-                    type="button"
-                    className="theme-toggle"
-                    onClick={toggle}
-                    aria-label={
-                        isDark ? "Switch to light mode" : "Switch to dark mode"
-                    }
-                    title={
-                        isDark ? "Switch to light mode" : "Switch to dark mode"
-                    }
-                >
-                    {isDark ? <SunIcon /> : <MoonIcon />}
-                </button>
             </div>
-        </header>
+        </>
     );
 }
